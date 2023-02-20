@@ -1,8 +1,8 @@
 {
    "name": "project",
    "version": "0.0.1",
-   "description": "Awesome project developed with TypeORM.",
-   "type": "commonjs",
+   "main": "index.js",
+   "license": "MIT",
    "devDependencies": {
       "@types/node": "^16.11.10",
       "ts-node": "10.7.0",
@@ -34,9 +34,5 @@
       "start": "node dist/server.ts",
       "dev": "ts-node-dev src/server.ts",
       "typeorm": "typeorm-ts-node-commonjs"
-   },
-   "main": "index.js",
-   "repository": "git@github.com:Grupo12-M6/back-end.git",
-   "author": "Bruna <bruna.dall9741@gmail.com>",
-   "license": "MIT"
+   }
 }

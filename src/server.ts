@@ -1,4 +1,4 @@
-import app from "./index"
+import app from "./app"
 import dataSource from "./data-source"
 
 (async () => {

@@ -1,0 +1,12 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Api Projeto Final",
+    "description": "API utilizada para cadastro de veiculos e usuarios",
+    "contact": {
+      "name": "Developer Site",
+      "url": "http://www.test.com/"
+    },
+    "version": "1.0"
+  }
+}

@@ -1,4 +1,14 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm"
+import { 
+  Column, 
+  Entity, 
+  ManyToOne, 
+  OneToMany, 
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from "typeorm"
+
+import { v4 as uuid } from "uuid";
 
 import { User } from "./user.entity"
 import { Comment } from "./comment.entity"
@@ -18,14 +28,14 @@ class Ad {
   @Column({ length: 400 })
   description: string
 
-  @Column({ length: 10 })
-  mileage: number
-
-  @Column({ length: 4 })
+  @Column()
   year: number
 
-  @Column({ length: 10})
+  @Column({ type: "decimal", precision:10, scale: 2 })
   price: number
+
+  @Column({ type: "decimal", precision:10, scale: 2 })
+  mileage: number
 
   @Column({ name: 'motor_type', length: 15 })
   motorType: string
@@ -36,11 +46,23 @@ class Ad {
   @OneToMany(() => Comment, (comment) => comment.ad)
   comments: Comment[]
 
-  @OneToMany(() => Image, (image) => image.ad)
+  @OneToMany(() => Image, (image) => image.ads)
   images: Image[]
 
   @ManyToOne(() => User)
   user: User
+
+  @CreateDateColumn({ type: "date" })
+  createdAt: Date;
+
+  @UpdateDateColumn({ type: "date" })
+  updatedAt: Date;
+
+  constructor() {
+    if (!this.id) {
+        this.id = uuid();
+    }
+  }
 }
 
 export { Ad }

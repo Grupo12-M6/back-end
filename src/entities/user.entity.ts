@@ -5,8 +5,12 @@ import {
   OneToMany,
   OneToOne,
   JoinColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from "typeorm"
 import { Exclude } from "class-transformer"
+
+import { v4 as uuid } from "uuid";
 
 import { Ad } from "./ad.entity"
 import { Address } from "./address.entity"
@@ -54,4 +58,16 @@ export class User {
 
   @OneToMany(() => Comment, (comment) => comment.user)
   comments: Comment[]
+
+  @CreateDateColumn({ type: "date" })
+  createdAt: Date;
+
+  @UpdateDateColumn({ type: "date" })
+  updatedAt: Date;
+
+  constructor() {
+    if (!this.id) {
+        this.id = uuid();
+    }
+  }
 }

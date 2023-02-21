@@ -1,4 +1,12 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm"
+import { 
+  Column, 
+  Entity, 
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from "typeorm"
+
+import { v4 as uuid } from "uuid";
 
 @Entity("addresses")
 class Address {
@@ -17,11 +25,23 @@ class Address {
   @Column({ length: 240 })
   street: string
 
-  @Column({length: 120 })
+  @Column()
   number: number
 
   @Column({ length: 100, nullable: true })
   complement: string
+
+  @CreateDateColumn({ type: "date" })
+  createdAt: Date;
+
+  @UpdateDateColumn({ type: "date" })
+  updatedAt: Date;
+  
+  constructor() {
+    if (!this.id) {
+        this.id = uuid();
+    }
+  }
 }
 
 export { Address }

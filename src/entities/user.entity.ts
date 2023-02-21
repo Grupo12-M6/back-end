@@ -11,6 +11,7 @@ import {
 import { Exclude } from "class-transformer"
 
 import { v4 as uuid } from "uuid";
+import { IsEmail } from "class-validator";
 
 import { Ad } from "./ad.entity"
 import { Address } from "./address.entity"
@@ -25,6 +26,7 @@ export class User {
   name: string
 
   @Column({ unique: true, length: 120 })
+  @IsEmail()
   email: string
 
   @Column({ length: 240 })
@@ -38,7 +40,7 @@ export class User {
   phoneNumber: string
 
   @Column()
-  birthday: Date
+  birthday: string
 
   @Column({ length: 400 })
   description: string
@@ -46,12 +48,12 @@ export class User {
   @Column({ name: "is_seller" })
   isSeller: boolean
 
-  @OneToOne(() => Address, (address) => address.id, {
-    eager: true,
-    nullable: false,
-  })
-  @JoinColumn()
-  address: Address
+  // @OneToOne(() => Address, (address) => address.id, {
+  //   eager: true,
+  //   nullable: false,
+  // })
+  // @JoinColumn()
+  // address: Address
 
   @OneToMany(() => Ad, (ad) => ad.user)
   ads: Ad[]

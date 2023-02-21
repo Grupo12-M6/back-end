@@ -9,4 +9,4 @@ import dataSource from "./data-source"
   app.listen(3333, () => {
     console.log("Data Source initialized")
   })
-})
+})()

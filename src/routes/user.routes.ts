@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { listAdsByUserController } from "../controllers/users.controller";
+import { createUserController, listAdsByUserController } from "../controllers/user.controllers";
 
 const routes = Router();
 
 const userRoutes = () => {
-    // routes.post("/", );
+    routes.post("/", createUserController);
     // routes.patch("/:id",);
     // routes.delete("/:id",);
     // routes.get("/",);

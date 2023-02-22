@@ -1,8 +1,10 @@
 import { Router } from "express";
 
-import { createAdsController } from "../controllers/ads.controller";
+import { 
+  createAdsController, 
+  deleteAdsController,
+} from "../controllers/ads.controller";
 import { authTokenMiddleware } from "../middlewares/authToken.middleware";
-import deleteAdsController from "../controllers/deleteAds.controller";
 
 const routes = Router();
 

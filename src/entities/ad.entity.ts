@@ -46,7 +46,7 @@ class Ad {
   @OneToMany(() => Comment, (comment) => comment.ad)
   comments: Comment[]
 
-  @OneToMany(() => Image, (image) => image.ads)
+  @OneToMany(() => Image, (image) => image.ads, {eager: true})
   images: Image[]
 
   @ManyToOne(() => User, {eager: true})

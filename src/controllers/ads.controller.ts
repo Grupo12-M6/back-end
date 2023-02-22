@@ -5,6 +5,7 @@ import { instanceToPlain } from "class-transformer";
 import { IAdsRequest } from "../interfaces/ads";
 
 import { createAdsService } from "../services/ads/createAds.service";
+import { listAdsService } from "../services/ads/listAds.service";
 
 import deleteAds from "../services/ads/deleteAds.service";
 import isActiveAds from "../services/ads/isActiveAds.service";
@@ -41,9 +42,16 @@ const updateAdsController = async (req: Request, res: Response) => {
   return res.status(200).json(updatedAd);
 };
 
+const listAdsController = async (req: Request, res: Response) => {
+    const response = await listAdsService()
+
+    return res.status(200).json(instanceToPlain(response))
+}
+
 export {
   createAdsController,
   deleteAdsController,
   isActiveAdsController,
   updateAdsController,
+  listAdsController
 };

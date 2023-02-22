@@ -49,7 +49,7 @@ class Ad {
   @OneToMany(() => Image, (image) => image.ads)
   images: Image[]
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, {eager: true})
   user: User
 
   @CreateDateColumn({ type: "date" })

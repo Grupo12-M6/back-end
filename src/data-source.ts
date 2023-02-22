@@ -12,6 +12,8 @@ import { Comment } from "./entities/comment.entity"
 import { createUser1676919685526 } from "./migrations/1676919685526-createUser"
 import { createImageAndAttAds1676986043765 } from "./migrations/1676986043765-createImageAndAttAds"
 import { attEntities1676987673582 } from "./migrations/1676987673582-attEntities"
+import { attUser1677006735867 } from "./migrations/1677006735867-attUser"
+import { testUser1677007190505 } from "./migrations/1677007190505-testUser"
 
 const setDataSourceConfig = (): DataSourceOptions => {
   const entitiesPath: string = path.join(__dirname, "./entities/**.{js,ts}")
@@ -47,7 +49,13 @@ const setDataSourceConfig = (): DataSourceOptions => {
     synchronize: false,
     logging: true,
     entities: [User, Ad, Image, Address, Comment],
-    migrations: [createUser1676919685526, createImageAndAttAds1676986043765, attEntities1676987673582],
+    migrations: [
+      createUser1676919685526,
+      createImageAndAttAds1676986043765,
+      attEntities1676987673582,
+      attUser1677006735867,
+      testUser1677007190505,
+    ],
   }
 }
 

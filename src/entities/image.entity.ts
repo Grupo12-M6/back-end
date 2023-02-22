@@ -19,7 +19,7 @@ class Image {
   @Column()
   url: string;
 
-  @ManyToOne(() => Ad, {eager: true})
+  @ManyToOne(() => Ad)
   ads: Ad;
 
   @CreateDateColumn({ type: "date" })

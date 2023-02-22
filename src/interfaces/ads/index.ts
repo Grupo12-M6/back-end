@@ -10,6 +10,10 @@ export interface IAds {
     isActive: boolean;
 }
 
+export interface IAdsImages {
+    url: string;
+}
+
 export interface IAdsRequest {
     title: string;
     adType: string;
@@ -20,6 +24,7 @@ export interface IAdsRequest {
     motorType: string;
     isActive: boolean;
     userId: string;
+    image: IAdsImages[]
 }
 
 export interface IAdsResponse {

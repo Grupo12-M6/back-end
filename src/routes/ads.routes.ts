@@ -5,6 +5,7 @@ import {
   deleteAdsController,
   isActiveAdsController,
   updateAdsController,
+  listAdsController
 } from "../controllers/ads.controller";
 import { authTokenMiddleware } from "../middlewares/authToken.middleware";
 
@@ -15,7 +16,7 @@ const adsRoutes = () => {
   routes.patch("/:id", authTokenMiddleware, updateAdsController);
   routes.delete("/:id", authTokenMiddleware, deleteAdsController);
   routes.delete("isActive/:id", authTokenMiddleware, isActiveAdsController);
-  // routes.get("/",);
+  routes.get("/", listAdsController);
 
   return routes;
 };

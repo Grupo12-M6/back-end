@@ -26,3 +26,8 @@ export interface IAdsResponse {
     message: string,
     data: IAds
 };
+
+export interface IAdsListResponse {
+    message: string;
+    data: IAds[]
+};

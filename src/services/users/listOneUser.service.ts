@@ -18,7 +18,7 @@ export const listOneUserService = async(id: string): Promise<IUserResponse> => {
     }
 
     return {
-        message: "Listed product",
+        message: "Listed User",
         data: userSearch
     }
 }

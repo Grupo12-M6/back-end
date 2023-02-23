@@ -4,6 +4,7 @@ import { Ad } from "../../entities/ad.entity";
 
 import { AppError } from "../../errors/appError";
 import { User } from "../../entities/user.entity";
+import { Image } from "../../entities/image.entity";
 
 const updateAd = async (data: IAdsRequest, id: string): Promise<Ad> => {
   const {
@@ -16,10 +17,12 @@ const updateAd = async (data: IAdsRequest, id: string): Promise<Ad> => {
     motorType,
     isActive,
     userId,
+    image,
   } = data;
 
   const adRepository = dataSource.getRepository(Ad);
   const userRepository = dataSource.getRepository(User);
+  const imageRepository = dataSource.getRepository(Image);
 
   const user = await userRepository.findOne({ where: { id: userId } });
 
@@ -38,6 +41,17 @@ const updateAd = async (data: IAdsRequest, id: string): Promise<Ad> => {
     isActive,
     user,
   });
+
+  const updatedAd = await adRepository.findOneBy({ id });
+
+  for (let i = 0; i < image.length; i++) {
+    const newImage = imageRepository.create({
+      url: image[i].url,
+      ads: updatedAd,
+    });
+
+    await imageRepository.save(newImage);
+  }
 
   const ad = await adRepository.findOneBy({ id });
 

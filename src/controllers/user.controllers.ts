@@ -4,6 +4,7 @@ import { instanceToPlain } from "class-transformer";
 import { createUserService } from "../services/users/createUser.service";
 import { IUserRequest } from "../interfaces/users";
 import listAdsByUserService from "../services/ads/listAdsByUser.service";
+import { listOneUserService } from "../services/users/listOneUser.service";
 
 const createUserController = async( req: Request, res: Response ) => {
     const data: IUserRequest = req.body;
@@ -20,7 +21,16 @@ const listAdsByUserController = async (req: Request, res: Response) => {
     return res.json(instanceToPlain(ads))
 }
 
+const listOneUserController = async( req: Request, res: Response ) => {
+    const { id } = req.params;
+
+    const response = await listOneUserService(id);
+
+    return res.status(200).json(instanceToPlain(response))
+}
+
 export { 
     createUserController, 
-    listAdsByUserController 
+    listAdsByUserController,
+    listOneUserController,
 }

@@ -7,9 +7,9 @@ import { IAdsRequest } from "../interfaces/ads";
 import { createAdsService } from "../services/ads/createAds.service";
 import { listAdsService } from "../services/ads/listAds.service";
 
-import deleteAds from "../services/ads/deleteAds.service";
 import isActiveAds from "../services/ads/isActiveAds.service";
 import updateAd from "../services/ads/updateAds.service";
+import deleteAdsService from "../services/ads/deleteAds.service";
 
 const createAdsController = async (req: Request, res: Response) => {
   const data: IAdsRequest = req.body;
@@ -21,14 +21,14 @@ const createAdsController = async (req: Request, res: Response) => {
 };
 
 const deleteAdsController = async (req: Request, res: Response) => {
-  const idAd = req.params.idAd;
-  await deleteAds(idAd);
+  const idAd = req.params.id;
+  await deleteAdsService(idAd);
 
-  return res.status(204).json();
+  return res.status(204).json({ message: "Ad deleted with success!" });
 };
 
 const isActiveAdsController = async (req: Request, res: Response) => {
-  const idAd = req.params.idAd;
+  const idAd = req.params.id;
   await isActiveAds(idAd);
 
   return res.status(204).json();

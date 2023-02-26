@@ -8,12 +8,9 @@ import { Ad } from "./entities/ad.entity"
 import { Image } from "./entities/image.entity"
 import { Address } from "./entities/address.entity"
 import { Comment } from "./entities/comment.entity"
+import { createApps1677265942122 } from "./migrations/1677265942122-createApps"
+import { isDelete1677447307133 } from "./migrations/1677447307133-isDelete"
 
-import { createUser1676919685526 } from "./migrations/1676919685526-createUser"
-import { createImageAndAttAds1676986043765 } from "./migrations/1676986043765-createImageAndAttAds"
-import { attEntities1676987673582 } from "./migrations/1676987673582-attEntities"
-import { attUser1677006735867 } from "./migrations/1677006735867-attUser"
-import { testUser1677007190505 } from "./migrations/1677007190505-testUser"
 
 const setDataSourceConfig = (): DataSourceOptions => {
   const entitiesPath: string = path.join(__dirname, "./entities/**.{js,ts}")
@@ -50,11 +47,8 @@ const setDataSourceConfig = (): DataSourceOptions => {
     logging: true,
     entities: [User, Ad, Image, Address, Comment],
     migrations: [
-      createUser1676919685526,
-      createImageAndAttAds1676986043765,
-      attEntities1676987673582,
-      attUser1677006735867,
-      testUser1677007190505,
+      createApps1677265942122,
+      isDelete1677447307133,
     ],
   }
 }

@@ -43,13 +43,19 @@ class Ad {
   @Column({ name: "is_active" })
   isActive: boolean
 
+  @Column({ name: "is_delete", default: false, nullable: true })
+  isDelete: boolean
+
   @OneToMany(() => Comment, (comment) => comment.ad)
   comments: Comment[]
 
-  @OneToMany(() => Image, (image) => image.ads, {eager: true})
+  @OneToMany(() => Image, (image) => image.ads, {
+    eager: true,
+    onDelete: 'CASCADE' 
+  })
   images: Image[]
 
-  @ManyToOne(() => User, {eager: true})
+  @ManyToOne(() => User, {eager: true, onDelete: "NO ACTION"})
   user: User
 
   @CreateDateColumn({ type: "date" })

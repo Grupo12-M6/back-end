@@ -15,7 +15,7 @@ const routes = Router();
 const adsRoutes = () => {
   routes.post("/", authTokenMiddleware, createAdsController);
   routes.patch("/:id", authTokenMiddleware, updateAdsController);
-  routes.get("/:id", authTokenMiddleware, listOneAdController);
+  routes.get("/:id", listOneAdController);
   routes.delete("/:id", authTokenMiddleware, deleteAdsController);
   routes.delete("isActive/:id", authTokenMiddleware, isActiveAdsController);
   routes.get("/", listAdsController);

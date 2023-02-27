@@ -10,6 +10,7 @@ import { listAdsService } from "../services/ads/listAds.service";
 import isActiveAds from "../services/ads/isActiveAds.service";
 import updateAd from "../services/ads/updateAds.service";
 import deleteAdsService from "../services/ads/deleteAds.service";
+import { listOneAdService } from "../services/ads/listOneAd.service";
 
 const createAdsController = async (req: Request, res: Response) => {
   const data: IAdsRequest = req.body;
@@ -43,15 +44,23 @@ const updateAdsController = async (req: Request, res: Response) => {
 };
 
 const listAdsController = async (req: Request, res: Response) => {
-    const response = await listAdsService()
+  const response = await listAdsService();
 
-    return res.status(200).json(instanceToPlain(response))
-}
+  return res.status(200).json(instanceToPlain(response));
+};
+
+const listOneAdController = async (req: Request, res: Response) => {
+  const adId = req.params.id;
+  const response = await listOneAdService(adId);
+
+  return res.status(200).json(instanceToPlain(response));
+};
 
 export {
   createAdsController,
   deleteAdsController,
   isActiveAdsController,
   updateAdsController,
-  listAdsController
+  listAdsController,
+  listOneAdController,
 };

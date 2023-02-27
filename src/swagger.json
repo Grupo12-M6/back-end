@@ -8,5 +8,663 @@
       "url": "http://www.test.com/"
     },
     "version": "1.0"
+  },
+  "servers": [
+    { "url": "http://localhost:3333/", "description": "Api Teste LocalHost" }
+  ],
+  "paths": {
+    "/login": {
+      "post": {
+        "sumarry": "Login Usuario",
+        "description": "Rota utilizada para login de usuarios",
+        "tags": ["Sessions"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#components/schemas/Sessions"
+              },
+              "examples": {
+                "Login Exemplo": {
+                  "value": {
+                    "email": "testeSeller@mail.com",
+                    "password": 12345
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Password not found"
+          },
+          "403": {
+            "description": "Wrong email/password",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Retorno": {
+                    "value": {
+                      "message": "Wrong email/password"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Account not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Retorno": {
+                    "value": {
+                      "message": "Account not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Retorno": {
+                    "value": {
+                      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlU2VsbGVyQG1haWwuY29tIiwiaWF0IjoxNjc3MjUyNzg2LCJleHAiOjE2NzcyODg3ODYsInN1YiI6IjYyZmY1OWFiLTZlYzUtNDJkZi1hZmRiLTg5Mjk2OGU0YmMxNyJ9.Hy7iM7PJurPAWlgb_iufslqowpdOCrVINuG5vU7leo4"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "sumarry": "Cadastro Usuario",
+        "description": "Rota utilizada para cadastro de usuarios",
+        "tags": ["Users"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#components/schemas/Users"
+              },
+              "examples": {
+                "Usuario Exemplo": {
+                  "value": {
+                    "name": "testeSeller",
+                    "email": "testeSeller@mail.com",
+                    "password": 12345,
+                    "cpf": 123456789101112,
+                    "phoneNumber": "55555555555",
+                    "birthday": "06-02-1997",
+                    "description": "eu sou um teste",
+                    "isSeller": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Retorno": {
+                    "value": {
+                      "message": "Created user",
+                      "data": {
+                        "id": "49d62ad2-b9c6-4f90-9564-f8c0163a6da0",
+                        "name": "testeSeller",
+                        "email": "testeSeller@mail.com",
+                        "cpf": 123456789101112,
+                        "phoneNumber": "55555555555",
+                        "birthday": "06-02-1997",
+                        "description": "eu sou um teste",
+                        "isSeller": true,
+                        "createdAt": "2023-02-27",
+                        "updatedAt": "2023-02-27"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Email already exists",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Retorno": {
+                    "value": {
+                      "message": "Email already exists"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "sumarry": "Buscar Usuario",
+        "description": "Rota utilizada para buscar apenas um usuario",
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Usuario pelo ID",
+            "required": "true"
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Retorno": {
+                    "value": {
+                      "message": "User not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Retorno": {
+                    "value": {
+                      "message": "Listed User",
+                      "data": {
+                        "id": "62ff59ab-6ec5-42df-afdb-892968e4bc17",
+                        "name": "testeSeller",
+                        "email": "testeSeller@mail.com",
+                        "cpf": "123456789101112",
+                        "phoneNumber": "55555555555",
+                        "birthday": "06-02-1997",
+                        "description": "eu sou um teste",
+                        "isSeller": true,
+                        "createdAt": "2023-02-24",
+                        "updatedAt": "2023-02-24"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}/ads": {
+      "get": {
+        "sumarry": "Buscar Anuncios de apenas um Usuario",
+        "description": "Rota utilizada para buscar anuncios de apenas um usuario",
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Usuario pelo ID",
+            "required": "true"
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Retorno": {
+                    "value": {
+                      "message": "User not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Retorno": {
+                    "value": [
+                      {
+                        "id": "c46287e1-cc7b-4330-9256-edc22b78417e",
+                        "title": "test 1",
+                        "adType": "venda",
+                        "description": "uma descrição de ads teste",
+                        "year": 2010,
+                        "price": "25.00",
+                        "mileage": "13.25",
+                        "motorType": "carro",
+                        "isActive": true,
+                        "createdAt": "2023-02-24",
+                        "updatedAt": "2023-02-24",
+                        "images": [],
+                        "user": {
+                          "id": "62ff59ab-6ec5-42df-afdb-892968e4bc17",
+                          "name": "testeSeller",
+                          "email": "testeSeller@mail.com",
+                          "cpf": "123456789101112",
+                          "phoneNumber": "55555555555",
+                          "birthday": "06-02-1997",
+                          "description": "eu sou um teste",
+                          "isSeller": true,
+                          "createdAt": "2023-02-24",
+                          "updatedAt": "2023-02-24"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ads": {
+      "post": {
+        "sumarry": "Cadastro Ads",
+        "description": "Rota utilizada para cadastro de Ads",
+        "tags": ["Ads"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#components/schemas/Ads"
+              },
+              "examples": {
+                "Anuncio Exemplo": {
+                  "value": {
+                    "title": "test 1",
+                    "adType": "venda",
+                    "year": 2010,
+                    "description": "uma descrição de ads teste",
+                    "mileage": 13.25,
+                    "motorType": "carro",
+                    "price": 25.0,
+                    "isActive": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Retorno": {
+                    "value": {
+                      "message": "Created Announcement",
+                      "data": {
+                        "title": "test 1",
+                        "adType": "venda",
+                        "year": 2010,
+                        "description": "uma descrição de ads teste",
+                        "mileage": 13.25,
+                        "motorType": "carro",
+                        "price": 25.0,
+                        "isActive": true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Saller",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Retorno": {
+                    "value": {
+                      "message": "You can only create products if you are a seller"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "security": [{ "bearerAuth": [] }],
+        "tags": ["Ads"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Retorno": {
+                    "value": {
+                      "message": "Listed all Ads",
+                      "data": [
+                        {
+                          "id": "c46287e1-cc7b-4330-9256-edc22b78417e",
+                          "title": "test 1",
+                          "adType": "venda",
+                          "description": "uma descrição de ads teste",
+                          "year": 2010,
+                          "price": "25.00",
+                          "mileage": "13.25",
+                          "motorType": "carro",
+                          "isActive": true,
+                          "createdAt": "2023-02-24",
+                          "updatedAt": "2023-02-24",
+                          "images": [],
+                          "user": {
+                            "id": "62ff59ab-6ec5-42df-afdb-892968e4bc17",
+                            "name": "testeSeller",
+                            "email": "testeSeller@mail.com",
+                            "cpf": "123456789101112",
+                            "phoneNumber": "55555555555",
+                            "birthday": "06-02-1997",
+                            "description": "eu sou um teste",
+                            "isSeller": true,
+                            "createdAt": "2023-02-24",
+                            "updatedAt": "2023-02-24"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ads/{id}": {
+      "patch": {
+        "security": [{ "bearerAuth": [] }],
+        "tags": ["Ads"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Ad pelo ID",
+            "required": "true"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#components/schemas/Ads"
+              },
+              "examples": {
+                "Anuncio Exemplo": {
+                  "value": {
+                    "title": "test 1",
+                    "adType": "venda",
+                    "year": 2010,
+                    "description": "uma descrição de ads teste",
+                    "mileage": 13.25,
+                    "motorType": "carro",
+                    "price": 25.0,
+                    "isActive": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "403": {
+            "description": "User not found"
+          },
+          "200": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Retorno": {
+                    "value": {
+                      "id": "c46287e1-cc7b-4330-9256-edc22b78417e",
+                      "title": "test 1",
+                      "adType": "venda",
+                      "description": "uma descrição de ads teste",
+                      "year": 2010,
+                      "price": "25.00",
+                      "mileage": "13.25",
+                      "motorType": "carro",
+                      "isActive": true,
+                      "createdAt": "2023-02-24",
+                      "updatedAt": "2023-02-24",
+                      "images": [],
+                      "user": {
+                        "id": "62ff59ab-6ec5-42df-afdb-892968e4bc17",
+                        "name": "testeSeller",
+                        "email": "testeSeller@mail.com",
+                        "cpf": "123456789101112",
+                        "phoneNumber": "55555555555",
+                        "birthday": "06-02-1997",
+                        "description": "eu sou um teste",
+                        "isSeller": true,
+                        "createdAt": "2023-02-24",
+                        "updatedAt": "2023-02-24"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [{ "bearerAuth": [] }],
+        "tags": ["Ads"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Ad pelo ID",
+            "required": "true"
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "This Ad does not exist!"
+          },
+          "204": {}
+        }
+      }
+    },
+    "/ads/isActive/{id}": {
+      "delete": {
+        "security": [{ "bearerAuth": [] }],
+        "tags": ["Ads"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Ad pelo ID",
+            "required": "true"
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "This Ad does not exist!"
+          },
+          "400": {
+            "description": "This ad is already inactive"
+          },
+          "204": {}
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Users": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "required": "true"
+          },
+          "email": {
+            "type": "string",
+            "required": "true"
+          },
+          "password": {
+            "type": "string",
+            "required": "true"
+          },
+          "cpf": {
+            "type": "string",
+            "required": "true"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "required": "true"
+          },
+          "birthday": {
+            "type": "string",
+            "required": "true"
+          },
+          "description": {
+            "type": "string",
+            "required": "true"
+          },
+          "address": {
+            "type": "object",
+            "required": "false",
+            "properties": {
+              "cep": {
+                "type": "string",
+                "required": "true"
+              },
+              "state": {
+                "type": "string",
+                "required": "true"
+              },
+              "city": {
+                "type": "string",
+                "required": "true"
+              },
+              "street": {
+                "type": "string",
+                "required": "true"
+              },
+              "number": {
+                "type": "number",
+                "required": "true"
+              },
+              "complement": {
+                "type": "string",
+                "required": "false"
+              },
+              "createdAt": {
+                "type": "date",
+                "required": "true"
+              },
+              "updatedAt": {
+                "type": "date",
+                "required": "true"
+              }
+            }
+          },
+          "isSeller": {
+            "type": "boolean",
+            "required": "true"
+          }
+        }
+      },
+      "Sessions": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "required": "true"
+          },
+          "password": {
+            "type": "string",
+            "required": "true"
+          }
+        }
+      },
+      "Ads": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "required": "true"
+          },
+          "adType": {
+            "type": "string",
+            "required": "true"
+          },
+          "description": {
+            "type": "string",
+            "required": "true"
+          },
+          "year": {
+            "type": "string",
+            "required": "true"
+          },
+          "price": {
+            "type": "string",
+            "required": "true"
+          },
+          "mileage": {
+            "type": "string",
+            "required": "true"
+          },
+          "motorType": {
+            "type": "string",
+            "required": "true"
+          },
+          "isActive": {
+            "type": "string",
+            "required": "true"
+          },
+          "image": {
+            "type": "object",
+            "required": "true",
+            "properties": {
+              "url": {
+                "type": "string",
+                "required": "true"
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
   }
 }

@@ -1,21 +1,22 @@
 import { Router } from "express";
-import { 
-    createUserController, 
-    listAdsByUserController,
-    listOneUserController
+import {
+  createUserController,
+  deleteUserController,
+  listAdsByUserController,
+  listOneUserController,
 } from "../controllers/user.controllers";
 
 const routes = Router();
 
 const userRoutes = () => {
-    routes.post("/", createUserController);
-    // routes.patch("/:id",);
-    // routes.delete("/:id",);
-    // routes.get("/",);
-    routes.get("/:id", listOneUserController);
-    routes.get('/:id/ads', listAdsByUserController)
+  routes.post("/", createUserController);
+  // routes.patch("/:id",);
+  routes.delete("/:id", deleteUserController);
+  // routes.get("/",);
+  routes.get("/:id", listOneUserController);
+  routes.get("/:id/ads", listAdsByUserController);
 
-    return routes;
-}
+  return routes;
+};
 
 export default userRoutes;

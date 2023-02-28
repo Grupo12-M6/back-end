@@ -4,3 +4,7 @@ export interface ICommentRequest {
     userId: string
 }
 
+export interface ICommentUpdate {
+    content?: string
+}
+

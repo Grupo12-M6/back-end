@@ -21,10 +21,10 @@ class Comment {
   @CreateDateColumn({ name: "created_at" })
   createdAt: Date
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, user => user.id)
   user: User
 
-  @ManyToOne(() => Ad)
+  @ManyToOne(() => Ad,  ad => ad.id)
   ad: Ad
 }
 

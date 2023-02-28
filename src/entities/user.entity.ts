@@ -10,8 +10,8 @@ import {
 } from "typeorm"
 import { Exclude } from "class-transformer"
 
-import { v4 as uuid } from "uuid"
-import { IsEmail } from "class-validator"
+import { v4 as uuid } from "uuid";
+import { IsEmail } from "class-validator";
 
 import { Ad } from "./ad.entity"
 import { Address } from "./address.entity"
@@ -48,11 +48,12 @@ export class User {
   @Column({ name: "is_seller" })
   isSeller: boolean
 
-  @OneToOne(() => Address, (address) => address.id, {
-    eager: true
-  })
-  @JoinColumn()
-  address: Address
+  // @OneToOne(() => Address, (address) => address.id, {
+  //   eager: true,
+  //   nullable: false,
+  // })
+  // @JoinColumn()
+  // address: Address
 
   @OneToMany(() => Ad, (ad) => ad.user)
   ads: Ad[]
@@ -61,14 +62,14 @@ export class User {
   comments: Comment[]
 
   @CreateDateColumn({ type: "date" })
-  createdAt: Date
+  createdAt: Date;
 
   @UpdateDateColumn({ type: "date" })
-  updatedAt: Date
+  updatedAt: Date;
 
   constructor() {
     if (!this.id) {
-      this.id = uuid()
+        this.id = uuid();
     }
   }
 }

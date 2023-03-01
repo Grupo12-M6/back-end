@@ -8,8 +8,12 @@ import { Ad } from "./entities/ad.entity"
 import { Image } from "./entities/image.entity"
 import { Address } from "./entities/address.entity"
 import { Comment } from "./entities/comment.entity"
+
 import { createApps1677265942122 } from "./migrations/1677265942122-createApps"
 import { isDelete1677447307133 } from "./migrations/1677447307133-isDelete"
+import { attIsActiveAd1677509165165 } from "./migrations/1677509165165-attIsActiveAd"
+import { ralationshipUserAddress1677673656707 } from "./migrations/1677673656707-ralationshipUserAddress"
+import { isDeleteUser1677682712813 } from "./migrations/1677682712813-isDeleteUser"
 
 
 const setDataSourceConfig = (): DataSourceOptions => {
@@ -49,6 +53,9 @@ const setDataSourceConfig = (): DataSourceOptions => {
     migrations: [
       createApps1677265942122,
       isDelete1677447307133,
+      attIsActiveAd1677509165165,
+      ralationshipUserAddress1677673656707,
+      isDeleteUser1677682712813,
     ],
   }
 }

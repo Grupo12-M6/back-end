@@ -17,8 +17,20 @@ const updateAd = async (data: IAdsRequest, id: string): Promise<Ad> => {
     motorType,
     isActive,
     userId,
-    image,
   } = data;
+
+  const dataAd = {
+    title,
+    adType,
+    description,
+    year,
+    price,
+    mileage,
+    motorType,
+    isActive,
+  }
+
+  const { images } = data;
 
   const adRepository = dataSource.getRepository(Ad);
   const userRepository = dataSource.getRepository(User);
@@ -30,27 +42,16 @@ const updateAd = async (data: IAdsRequest, id: string): Promise<Ad> => {
     throw new AppError("User not found", 403);
   }
 
-  await adRepository.update(id, {
-    title,
-    adType,
-    description,
-    year,
-    price,
-    mileage,
-    motorType,
-    isActive,
-    user,
-  });
+  await adRepository.update(id, {...dataAd});
 
   const updatedAd = await adRepository.findOneBy({ id });
+  console.log(images)
+  for (let i = 0; i < images!.length; i++) {
 
-  for (let i = 0; i < image.length; i++) {
-    const newImage = imageRepository.create({
-      url: image[i].url,
+    await imageRepository.update(images[i].id, {
+      url: images[i].url,
       ads: updatedAd,
     });
-
-    await imageRepository.save(newImage);
   }
 
   const ad = await adRepository.findOneBy({ id });

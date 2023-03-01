@@ -40,7 +40,7 @@ class Ad {
   @Column({ name: 'motor_type', length: 15 })
   motorType: string
 
-  @Column({ name: "is_active" })
+  @Column({ name: "is_active", default: true, nullable: true })
   isActive: boolean
 
   @Column({ name: "is_delete", default: false, nullable: true })
@@ -55,7 +55,7 @@ class Ad {
   })
   images: Image[]
 
-  @ManyToOne(() => User, {eager: true, onDelete: "NO ACTION"})
+  @ManyToOne(() => User, {eager: true, onDelete: 'CASCADE'})
   user: User
 
   @CreateDateColumn({ type: "date" })

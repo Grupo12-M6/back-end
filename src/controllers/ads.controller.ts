@@ -1,4 +1,4 @@
-import { IAds } from "./../interfaces/ads/index";
+import { IAds, IAdsUpdate } from "./../interfaces/ads/index";
 import { Request, Response } from "express";
 import { instanceToPlain } from "class-transformer";
 
@@ -36,11 +36,11 @@ const isActiveAdsController = async (req: Request, res: Response) => {
 };
 
 const updateAdsController = async (req: Request, res: Response) => {
-  const adData: IAdsRequest = req.body;
+  const adData: IAdsUpdate = req.body;
   const adId = req.params.id;
   const updatedAd = await updateAd(adData, adId);
 
-  return res.status(200).json(updatedAd);
+  return res.status(200).json(instanceToPlain(updatedAd));
 };
 
 const listAdsController = async (req: Request, res: Response) => {

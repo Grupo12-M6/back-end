@@ -28,6 +28,21 @@ export interface IAdsRequest {
     images: IAdsImages[]
 }
 
+export interface IAdsUpdate {
+    title?: string;
+    adType?: string;
+    description?: string;
+    year?: number;
+    price?: number;
+    mileage?: number;
+    motorType?: string;
+    isActive?: boolean;
+    userId?: string;
+    images?: IAdsImages[]
+}
+
+
+
 export interface IAdsResponse {
     message: string,
     data: IAds

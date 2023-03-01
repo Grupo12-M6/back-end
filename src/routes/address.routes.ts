@@ -4,13 +4,14 @@ import {
   listAddressByUserController,
   updateAddressController,
 } from "../controllers/addresses.controller";
+import { authTokenMiddleware } from "../middlewares/authToken.middleware";
 
 const routes = Router();
 
 const addressRoutes = () => {
-  routes.patch("/:id", updateAddressController);
+  routes.patch("/:id", authTokenMiddleware, updateAddressController);
   // routes.delete("/:id", deleteAddressController);
-  routes.get("/", listAddressByUserController);
+  routes.get("/", authTokenMiddleware, listAddressByUserController);
 
   return routes;
 };

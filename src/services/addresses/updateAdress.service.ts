@@ -1,4 +1,4 @@
-import { IAddressRequest } from "./../../interfaces/addresses/index";
+import { IAddressRequest, IAddressUpdate } from "./../../interfaces/addresses/index";
 import dataSource from "../../data-source";
 
 import { AppError } from "../../errors/appError";
@@ -6,34 +6,21 @@ import { User } from "../../entities/user.entity";
 import { Address } from "../../entities/address.entity";
 
 const updateAddressService = async (
-  data: IAddressRequest,
+  data: IAddressUpdate,
   id: string
 ): Promise<Address> => {
-  const { cep, state, city, street, number, complement, userId } = data;
 
   const addressRepository = dataSource.getRepository(Address);
   const userRepository = dataSource.getRepository(User);
 
-  const user = await userRepository.findOne({ where: { id: userId } });
+  // const user = await userRepository.findOne({ where: { id: userId } });
 
-  if (!user) {
-    throw new AppError("User not found", 403);
-  }
 
-  await addressRepository.update(id, {
-    cep,
-    state,
-    city,
-    street,
-    number,
-    complement
-  });
+  await addressRepository.update(id, {...data});
 
   const updatedAddress = await addressRepository.findOneBy({ id });
 
-  const address = await addressRepository.findOneBy({ id });
-
-  return address;
+  return updatedAddress;
 };
 
 export default updateAddressService;

@@ -1,47 +1,52 @@
-import { 
-  Column, 
-  Entity, 
+import { User } from "./user.entity";
+import {
+  Column,
+  Entity,
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-} from "typeorm"
+  ManyToOne,
+} from "typeorm";
 
 import { v4 as uuid } from "uuid";
 
 @Entity("addresses")
 class Address {
   @PrimaryGeneratedColumn("uuid")
-  id: string
+  id: string;
 
   @Column({ length: 8 })
-  cep: string
+  cep: string;
 
   @Column({ length: 2 })
-  state: string
+  state: string;
 
   @Column({ length: 80 })
-  city: string
+  city: string;
 
   @Column({ length: 240 })
-  street: string
+  street: string;
 
   @Column()
-  number: number
+  number: number;
 
   @Column({ length: 100, nullable: true })
-  complement: string
+  complement: string;
+
+  @ManyToOne(() => User, { eager: true, onDelete: "NO ACTION" })
+  user: User;
 
   @CreateDateColumn({ type: "date" })
   createdAt: Date;
 
   @UpdateDateColumn({ type: "date" })
   updatedAt: Date;
-  
+
   constructor() {
     if (!this.id) {
-        this.id = uuid();
+      this.id = uuid();
     }
   }
 }
 
-export { Address }
+export { Address };

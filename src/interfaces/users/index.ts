@@ -10,7 +10,7 @@ export interface IUser {
     birthday: string;
     description: string;
     isSeller: boolean;
-    address?: IAddress; 
+    address: IAddress; 
     createdAt: Date;
     updatedAt: Date;
 };
@@ -23,7 +23,7 @@ export interface IUserRequest {
     phoneNumber: string;
     birthday: string;
     description: string;
-    address?: IAddress;
+    address: IAddress;
     isSeller: boolean;
 }
 

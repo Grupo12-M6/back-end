@@ -48,18 +48,22 @@ export class User {
   @Column({ name: "is_seller" })
   isSeller: boolean
 
-  // @OneToOne(() => Address, (address) => address.id, {
-  //   eager: true,
-  //   nullable: false,
-  // })
-  // @JoinColumn()
-  // address: Address
+  @OneToOne(() => Address, (address) => address.id, {
+    eager: true,
+    nullable: false,
+    onDelete: "CASCADE"
+  })
+  @JoinColumn()
+  address: Address
 
-  @OneToMany(() => Ad, (ad) => ad.user)
+  @OneToMany(() => Ad, (ad) => ad.user, {onDelete: "CASCADE"})
   ads: Ad[]
 
-  @OneToMany(() => Comment, (comment) => comment.user)
+  @OneToMany(() => Comment, (comment) => comment.user, {onDelete: "CASCADE"})
   comments: Comment[]
+
+  @Column({ name: "is_delete", default: false, nullable: true })
+  isDelete: boolean
 
   @CreateDateColumn({ type: "date" })
   createdAt: Date;

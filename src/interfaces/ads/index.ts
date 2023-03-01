@@ -12,6 +12,7 @@ export interface IAds {
 
 export interface IAdsImages {
     url: string;
+    id: string;
 }
 
 export interface IAdsRequest {
@@ -24,7 +25,7 @@ export interface IAdsRequest {
     motorType: string;
     isActive: boolean;
     userId: string;
-    image: IAdsImages[]
+    images: IAdsImages[]
 }
 
 export interface IAdsResponse {

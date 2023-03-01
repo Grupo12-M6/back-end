@@ -33,9 +33,6 @@ class Address {
   @Column({ length: 100, nullable: true })
   complement: string;
 
-  @ManyToOne(() => User, { eager: true, onDelete: "NO ACTION" })
-  user: User;
-
   @CreateDateColumn({ type: "date" })
   createdAt: Date;
 

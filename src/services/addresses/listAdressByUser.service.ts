@@ -4,16 +4,13 @@ import { Address } from "../../entities/address.entity";
 import { User } from "../../entities/user.entity";
 import { AppError } from "../../errors/appError";
 
-const listAddressByUserService = async (id: string): Promise<Address[]> => {
+const listAddressByUserService = async (id: string): Promise<Address> => {
   const userRepository = dataSource.getRepository(User);
 
   const user = await userRepository.findOne({
     where: {
       id,
-    },
-    relations: {
-      address: true,
-    },
+    }
   });
 
   if (!user) {

@@ -50,8 +50,7 @@ class Ad {
   comments: Comment[]
 
   @OneToMany(() => Image, (image) => image.ads, {
-    eager: true,
-    onDelete: 'CASCADE' 
+    eager: true
   })
   images: Image[]
 

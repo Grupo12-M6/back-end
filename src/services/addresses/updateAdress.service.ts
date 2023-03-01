@@ -26,8 +26,7 @@ const updateAddressService = async (
     city,
     street,
     number,
-    complement,
-    user,
+    complement
   });
 
   const updatedAddress = await addressRepository.findOneBy({ id });

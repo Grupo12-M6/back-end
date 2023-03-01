@@ -27,11 +27,13 @@ const deleteUserService = async (id: string): Promise<boolean> => {
   await userRepository.update(id, {
     isDelete: true,
   });
-
-  for(let i = 0; i <= ad!.length; i++) {
-    await adRepository.update(ad[i].id!, {
-      isDelete: true,
-    });
+  
+  if(ad) {
+    for(let i = 0; i <= ad?.length; i++) {
+      await adRepository.update(ad[i].id!, {
+        isDelete: true,
+      });
+    }
   }
 
   return true;

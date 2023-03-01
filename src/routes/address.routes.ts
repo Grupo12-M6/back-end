@@ -1,7 +1,6 @@
 import { Router } from "express";
 import {
-  createAddressController,
-  deleteAddressController,
+  // deleteAddressController,
   listAddressByUserController,
   updateAddressController,
 } from "../controllers/addresses.controller";
@@ -9,9 +8,8 @@ import {
 const routes = Router();
 
 const addressRoutes = () => {
-  routes.post("/", createAddressController);
   routes.patch("/:id", updateAddressController);
-  routes.delete("/:id", deleteAddressController);
+  // routes.delete("/:id", deleteAddressController);
   routes.get("/", listAddressByUserController);
 
   return routes;

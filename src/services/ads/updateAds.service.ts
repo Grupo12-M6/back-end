@@ -1,4 +1,4 @@
-import { IAds, IAdsRequest } from "./../../interfaces/ads/index";
+import { IAds, IAdsUpdate } from "./../../interfaces/ads/index";
 import dataSource from "../../data-source";
 import { Ad } from "../../entities/ad.entity";
 
@@ -6,7 +6,7 @@ import { AppError } from "../../errors/appError";
 import { User } from "../../entities/user.entity";
 import { Image } from "../../entities/image.entity";
 
-const updateAd = async (data: IAdsRequest, id: string): Promise<Ad> => {
+const updateAd = async (data: IAdsUpdate, id: string): Promise<Ad> => {
   const {
     title,
     adType,

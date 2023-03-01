@@ -27,6 +27,15 @@ export interface IUserRequest {
     isSeller: boolean;
 }
 
+export interface IUserUpdate {
+    name?: string;
+    email?: string;
+    cpf?: string;
+    phoneNumber?: string;
+    birthday?: string;
+    description?: string;
+}
+
 export interface IUserLogin {
     email: string;
     password: string;

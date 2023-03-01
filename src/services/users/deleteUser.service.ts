@@ -9,7 +9,7 @@ const deleteUserService = async (id: string): Promise<boolean> => {
   const user = await userRepository.findOneBy({ id });
 
   if (!user) {
-    throw new AppError("This Ad does not exist!", 404);
+    throw new AppError("This user does not exist!", 404);
   }
 
   await userRepository.delete(id);

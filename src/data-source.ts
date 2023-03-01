@@ -14,6 +14,7 @@ import { isDelete1677447307133 } from "./migrations/1677447307133-isDelete"
 import { attIsActiveAd1677509165165 } from "./migrations/1677509165165-attIsActiveAd"
 import { ralationshipUserAddress1677673656707 } from "./migrations/1677673656707-ralationshipUserAddress"
 import { isDeleteUser1677682712813 } from "./migrations/1677682712813-isDeleteUser"
+import { attAddress1677694258193 } from "./migrations/1677694258193-attAddress"
 
 
 const setDataSourceConfig = (): DataSourceOptions => {
@@ -56,6 +57,7 @@ const setDataSourceConfig = (): DataSourceOptions => {
       attIsActiveAd1677509165165,
       ralationshipUserAddress1677673656707,
       isDeleteUser1677682712813,
+      attAddress1677694258193,
     ],
   }
 }

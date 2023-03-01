@@ -7,46 +7,46 @@ import {
   JoinColumn,
   CreateDateColumn,
   UpdateDateColumn,
-} from "typeorm"
-import { Exclude } from "class-transformer"
+} from "typeorm";
+import { Exclude } from "class-transformer";
 
 import { v4 as uuid } from "uuid";
 import { IsEmail } from "class-validator";
 
-import { Ad } from "./ad.entity"
-import { Address } from "./address.entity"
-import { Comment } from "./comment.entity"
+import { Ad } from "./ad.entity";
+import { Address } from "./address.entity";
+import { Comment } from "./comment.entity";
 
 @Entity("users")
 export class User {
   @PrimaryGeneratedColumn("uuid")
-  id: string
+  id: string;
 
   @Column({ length: 120 })
-  name: string
+  name: string;
 
   @Column({ unique: true, length: 120 })
   @IsEmail()
-  email: string
+  email: string;
 
   @Column({ length: 240 })
   @Exclude()
-  password: string
+  password: string;
 
   @Column({ length: 15 })
-  cpf: string
+  cpf: string;
 
   @Column({ name: "created_number", length: 11 })
-  phoneNumber: string
+  phoneNumber: string;
 
   @Column()
-  birthday: string
+  birthday: string;
 
   @Column({ length: 400 })
-  description: string
+  description: string;
 
   @Column({ name: "is_seller" })
-  isSeller: boolean
+  isSeller: boolean;
 
   @OneToOne(() => Address, (address) => address.id, {
     eager: true,
@@ -73,7 +73,7 @@ export class User {
 
   constructor() {
     if (!this.id) {
-        this.id = uuid();
+      this.id = uuid();
     }
   }
 }

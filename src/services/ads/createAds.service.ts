@@ -8,7 +8,7 @@ import { Image } from "../../entities/image.entity";
 import { IAdsRequest, IAdsResponse } from "../../interfaces/ads";
 
 export const createAdsService = async ({
-    title, adType, year, description, mileage, motorType, price, isActive, userId, image
+    title, adType, year, description, mileage, motorType, price, isActive, userId, images
 }: IAdsRequest): Promise<IAdsResponse> => {
     
     const adsRepository = dataSource.getRepository(Ad);
@@ -25,6 +25,10 @@ export const createAdsService = async ({
         throw new AppError("You can only create products if you are a seller")
     }
 
+    if(user.isDelete) {
+        throw new AppError("user has been deleted")
+    }
+
     const newAds = adsRepository.create({
         title, 
         adType, 
@@ -38,10 +42,12 @@ export const createAdsService = async ({
     })
 
     await adsRepository.save(newAds)
+
+    // console.log(images)
     
-    for(let i = 0; i < image.length; i++) {
+    for(let i = 0; i < images?.length; i++) {
         const newImage = imageRepository.create({
-            url: image[i].url,
+            url: images[i].url,
             ads: newAds
         })
 

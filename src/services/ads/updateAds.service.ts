@@ -15,7 +15,6 @@ const updateAd = async (data: IAdsUpdate, id: string): Promise<Ad> => {
     price,
     mileage,
     motorType,
-    isActive,
     userId,
   } = data;
 
@@ -27,7 +26,6 @@ const updateAd = async (data: IAdsUpdate, id: string): Promise<Ad> => {
     price,
     mileage,
     motorType,
-    isActive,
   }
 
   const { images } = data;
@@ -37,6 +35,8 @@ const updateAd = async (data: IAdsUpdate, id: string): Promise<Ad> => {
   const imageRepository = dataSource.getRepository(Image);
 
   const user = await userRepository.findOne({ where: { id: userId } });
+  const adVar = await adRepository.findOne({ where: { id: id } });
+  // const imageAd = await imageRepository.find({where: { ads: {id: id} }})
 
   if (!user) {
     throw new AppError("User not found", 403);
@@ -45,15 +45,44 @@ const updateAd = async (data: IAdsUpdate, id: string): Promise<Ad> => {
   await adRepository.update(id, {...dataAd});
 
   const updatedAd = await adRepository.findOneBy({ id });
-  console.log(images)
-  for (let i = 0; i < images!.length; i++) {
-
-    await imageRepository.update(images[i].id, {
-      url: images[i].url,
-      ads: updatedAd,
-    });
+  if (images.length == 1) {
+    await imageRepository.update(adVar.images[0], {
+        url: images[0].url,
+        ads: updatedAd
+    })
   }
-
+  if (images.length >= adVar.images.length ) {
+    for (let i = 0; i < images?.length; i++) {
+      if(i < adVar.images.length){
+        await imageRepository.update(adVar.images[i], {
+            url: images[i].url,
+            ads: updatedAd
+        })
+      } else{
+          const newImage = imageRepository.create({
+            url: images[i].url,
+            ads: updatedAd
+        })
+        await imageRepository.save(newImage)
+      }
+    }
+  }
+  else if (images.length < adVar.images.length ) {
+    for (let i = 0; i < adVar?.images.length; i++) {
+      if(i < images.length){
+        await imageRepository.update(adVar.images[i], {
+            url: images[i].url,
+            ads: updatedAd
+        })
+      } else{
+        await imageRepository.update(adVar.images[i], {
+          url: adVar.images[i].url,
+          ads: updatedAd
+        })
+      }
+    }
+  } 
+  
   const ad = await adRepository.findOneBy({ id });
 
   return ad;

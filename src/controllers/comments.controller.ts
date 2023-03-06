@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-
+import { instanceToPlain } from "class-transformer";
 import listCommentsService from "../services/comments/listComments.service";
 import createCommentService from "../services/comments/createComment.service";
 import updateCommentService from "../services/comments/updateComment.service";
@@ -12,19 +12,19 @@ const createCommentController = async (req: Request, res: Response) => {
   const data = { ...req.body, userId: id };
   const comment = await createCommentService(data);
 
-  return res.status(201).json(comment);
+  return res.status(201).json(instanceToPlain(comment));
 };
 
 const listCommentsController = async (req: Request, res: Response) => {
   const comments = await listCommentsService();
 
-  return res.json(comments);
+  return res.json(instanceToPlain(comments));
 };
 
 const listCommentsForOneAdController = async (req: Request, res: Response) => {
   const adId = req.params.id;
   const comments = await listCommentsForOneAdService(adId);
-  return res.json(comments);
+  return res.json(instanceToPlain(comments));
 };
 
 const updateCommentController = async (req: Request, res: Response) => {

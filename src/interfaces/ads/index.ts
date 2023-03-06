@@ -36,7 +36,6 @@ export interface IAdsUpdate {
     price?: number;
     mileage?: number;
     motorType?: string;
-    isActive?: boolean;
     userId?: string;
     images?: IAdsImages[]
 }

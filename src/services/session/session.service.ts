@@ -18,6 +18,10 @@ export const sessionService = async({
         throw new AppError( "Account not found" );
     }
 
+    if (user.isDelete) {
+        throw new AppError("User has been deleted!", 404);
+    }
+
     if(!user.password) {
         throw new AppError( "Password not found", 401 );
     }

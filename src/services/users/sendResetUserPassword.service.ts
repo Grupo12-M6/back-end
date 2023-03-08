@@ -28,7 +28,7 @@ export const sendResetUserPasswordService = async (
   const emailData: IEmailRequest = {
     to: email,
     subject: "Reset de senha",
-    text: `<h1>Mudança de Senha</h1> <h3>Olá ${user.name}, ative sua conta clicando no link: ${protocol}://${host}/users/password/${resetPasswordToken} </h3>`,
+    text: `<h1>Mudança de Senha</h1> <h3>Olá ${user.name}, altere sua senha clicando no link: ${protocol}://${host}/users/password/${resetPasswordToken} </h3>`,
   };
 
   await sendEmail(emailData);

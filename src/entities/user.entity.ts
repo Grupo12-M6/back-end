@@ -48,22 +48,31 @@ export class User {
   @Column({ name: "is_seller" })
   isSeller: boolean;
 
+  @Column()
+  active: boolean;
+
+  @Column({ nullable: true })
+  tokenActivation: string;
+
+  @Column({ nullable: true })
+  tokenResetPassword: string;
+
   @OneToOne(() => Address, (address) => address.id, {
     eager: true,
     nullable: false,
-    onDelete: "CASCADE"
+    onDelete: "CASCADE",
   })
   @JoinColumn()
-  address: Address
+  address: Address;
 
-  @OneToMany(() => Ad, (ad) => ad.user, {onDelete: "CASCADE"})
-  ads: Ad[]
+  @OneToMany(() => Ad, (ad) => ad.user, { onDelete: "CASCADE" })
+  ads: Ad[];
 
-  @OneToMany(() => Comment, (comment) => comment.user, {onDelete: "CASCADE"})
-  comments: Comment[]
+  @OneToMany(() => Comment, (comment) => comment.user, { onDelete: "CASCADE" })
+  comments: Comment[];
 
   @Column({ name: "is_delete", default: false, nullable: true })
-  isDelete: boolean
+  isDelete: boolean;
 
   @CreateDateColumn({ type: "date" })
   createdAt: Date;

@@ -16,7 +16,7 @@ const sendEmail = async ({ to, subject, text }: IEmailRequest) => {
 
   await transporter
     .sendMail({
-      from: "m6projeto@outlook.com.br",
+      from: "m6project@outlook.com.br",
       to: to,
       subject: subject,
       html: text,

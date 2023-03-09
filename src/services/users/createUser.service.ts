@@ -66,7 +66,7 @@ export const createUserService = async (
   const emailData: IEmailRequest = {
     to: email,
     subject: "Ativação da Conta",
-    text: `<h1>Ative sua conta</h1> <h3>Seja bem-vindo ${name}, ative sua conta clicando no link: ${protocol}://${host}/users/activate/${activationToken} </h3>`,
+    text: `<h1>Ative sua conta</h1> <h3>Seja bem-vindo ${name}, ative sua conta clicando no link: ${protocol}://localhost:5173/users/activate/${activationToken} </h3>`,
   };
 
   await sendEmail(emailData);
